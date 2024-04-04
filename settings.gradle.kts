@@ -31,4 +31,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "generativeai"
 include(":generativeai")
+include(":common")
 includeBuild("./plugins")

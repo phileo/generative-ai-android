@@ -16,7 +16,6 @@
 
 package com.google.ai.client.generativeai.type
 
-import io.ktor.client.plugins.HttpTimeout
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -28,13 +27,16 @@ import kotlin.time.toDuration
  *   first response.
  * @property apiVersion the api endpoint to call.
  */
-class RequestOptions(val timeout: Duration, val apiVersion: String = "v1") {
+class RequestOptions(
+  val timeout: Duration,
+  val apiVersion: String = "v1",
+) {
   @JvmOverloads
   constructor(
-    timeout: Long? = HttpTimeout.INFINITE_TIMEOUT_MS,
-    apiVersion: String = "v1"
+    timeout: Long? = Long.MAX_VALUE,
+    apiVersion: String = "v1",
   ) : this(
-    (timeout ?: HttpTimeout.INFINITE_TIMEOUT_MS).toDuration(DurationUnit.MILLISECONDS),
-    apiVersion
+    (timeout ?: Long.MAX_VALUE).toDuration(DurationUnit.MILLISECONDS),
+    apiVersion,
   )
 }
